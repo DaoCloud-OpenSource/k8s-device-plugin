@@ -23,10 +23,10 @@ import (
 	"syscall"
 	"time"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/info"
-	"github.com/NVIDIA/k8s-device-plugin/internal/plugin"
-	"github.com/NVIDIA/k8s-device-plugin/internal/rm"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/info"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/plugin"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/rm"
 	"github.com/fsnotify/fsnotify"
 	cli "github.com/urfave/cli/v2"
 
@@ -115,6 +115,12 @@ func main() {
 			Value:   spec.DefaultContainerDriverRoot,
 			Usage:   "the path where the NVIDIA driver root is mounted in the container; used for generating CDI specifications",
 			EnvVars: []string{"CONTAINER_DRIVER_ROOT"},
+		},
+		&cli.BoolFlag{
+			Name:    "topology-enabled",
+			Value:   false,
+			Usage:   "enabled gpu topology aware info upload to node.",
+			EnvVars: []string{"TOPOLOGY_ENABLE"},
 		},
 	}
 

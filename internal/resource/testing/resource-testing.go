@@ -19,7 +19,7 @@ package testing
 import (
 	"fmt"
 
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
 )
 
 // DeviceMock provides an alias that allows for additional functions to be defined.

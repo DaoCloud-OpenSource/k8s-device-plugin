@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/NVIDIA/k8s-device-plugin/tests/e2e/common"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/tests/e2e/common"
 	. "github.com/onsi/gomega"
 	gomegatypes "github.com/onsi/gomega/types"
 

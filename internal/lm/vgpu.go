@@ -19,7 +19,7 @@ package lm
 import (
 	"fmt"
 
-	"github.com/NVIDIA/k8s-device-plugin/internal/vgpu"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/vgpu"
 )
 
 // vgpuLabeler manages VGPUs labels for the node

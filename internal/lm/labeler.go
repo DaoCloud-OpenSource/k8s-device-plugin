@@ -19,9 +19,9 @@ package lm
 import (
 	"fmt"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
-	"github.com/NVIDIA/k8s-device-plugin/internal/vgpu"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/vgpu"
 )
 
 // Labeler defines an interface for generating labels
@@ -35,11 +35,9 @@ func NewLabelers(manager resource.Manager, vgpu vgpu.Interface, config *spec.Con
 	if err != nil {
 		return nil, fmt.Errorf("error creating NVML labeler: %v", err)
 	}
-
 	l := Merge(
 		nvmlLabeler,
 		NewVGPULabeler(vgpu),
 	)
-
 	return l, nil
 }

@@ -19,10 +19,10 @@ package main
 import (
 	"fmt"
 
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/cdi"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/plugin/manager"
 	"github.com/NVIDIA/go-nvlib/pkg/nvml"
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/cdi"
-	"github.com/NVIDIA/k8s-device-plugin/internal/plugin/manager"
 )
 
 // NewPluginManager creates an NVML-based plugin manager

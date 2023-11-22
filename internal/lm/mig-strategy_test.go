@@ -19,9 +19,9 @@ package lm
 import (
 	"testing"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
-	rt "github.com/NVIDIA/k8s-device-plugin/internal/resource/testing"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
+	rt "github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource/testing"
 	"github.com/stretchr/testify/require"
 )
 

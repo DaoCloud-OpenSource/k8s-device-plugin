@@ -17,8 +17,8 @@
 package resource
 
 import (
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
 	"github.com/NVIDIA/go-nvlib/pkg/nvlib/info"
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
 	"k8s.io/klog/v2"
 )
 

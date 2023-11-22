@@ -23,8 +23,8 @@ import (
 	"github.com/NVIDIA/go-nvlib/pkg/nvml"
 	"k8s.io/klog/v2"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/cdi"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/cdi"
 )
 
 type manager struct {

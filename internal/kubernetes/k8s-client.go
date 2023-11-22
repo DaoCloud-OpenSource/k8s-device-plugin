@@ -17,8 +17,12 @@
 package kubernetes
 
 import (
+	clientset "k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
+	"k8s.io/client-go/util/homedir"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"k8s.io/client-go/rest"
@@ -63,4 +67,17 @@ func GetKubernetesClient() (*nfdclient.Clientset, error) {
 	}
 
 	return client, nil
+}
+
+func GetKubernetesClientSet() (clientset.Interface, error) {
+	config, err := rest.InClusterConfig()
+	if err != nil {
+		kubeconfig := filepath.Join(homedir.HomeDir(), ".kube", "config")
+		config, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
+		if err != nil {
+			return nil, err
+		}
+	}
+	client, err := clientset.NewForConfig(config)
+	return client, err
 }

@@ -17,7 +17,7 @@
 package manager
 
 import (
-	"github.com/NVIDIA/k8s-device-plugin/internal/plugin"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/plugin"
 )
 
 type null struct{}

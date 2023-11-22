@@ -17,7 +17,7 @@
 package mig
 
 import (
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
 )
 
 // DeviceInfo stores information about all devices on the node

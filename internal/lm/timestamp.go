@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
 )
 
 // NewTimestampLabeler creates a new label manager for generating timestamp

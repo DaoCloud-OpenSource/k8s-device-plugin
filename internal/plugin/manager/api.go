@@ -16,7 +16,7 @@
 
 package manager
 
-import "github.com/NVIDIA/k8s-device-plugin/internal/plugin"
+import "github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/plugin"
 
 // Interface defines the API for the plugin manager package
 type Interface interface {

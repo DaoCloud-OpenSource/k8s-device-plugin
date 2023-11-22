@@ -15,10 +15,10 @@ import (
 	"testing"
 	"time"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
-	rt "github.com/NVIDIA/k8s-device-plugin/internal/resource/testing"
-	"github.com/NVIDIA/k8s-device-plugin/internal/vgpu"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
+	rt "github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource/testing"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/vgpu"
 	"github.com/stretchr/testify/require"
 )
 

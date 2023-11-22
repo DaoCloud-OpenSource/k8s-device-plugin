@@ -35,7 +35,7 @@ import (
 	helm "github.com/mittwald/go-helm-client"
 	helmValues "github.com/mittwald/go-helm-client/values"
 
-	"github.com/NVIDIA/k8s-device-plugin/tests/e2e/common"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/tests/e2e/common"
 
 	nfdclient "sigs.k8s.io/node-feature-discovery/pkg/generated/clientset/versioned"
 )

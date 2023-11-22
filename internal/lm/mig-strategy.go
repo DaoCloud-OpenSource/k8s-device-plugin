@@ -19,9 +19,9 @@ package lm
 import (
 	"fmt"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/mig"
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/mig"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
 	"k8s.io/klog/v2"
 )
 

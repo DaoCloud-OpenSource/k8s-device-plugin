@@ -4,17 +4,18 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
 	"syscall"
 	"time"
 
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
-	"github.com/NVIDIA/k8s-device-plugin/internal/info"
-	"github.com/NVIDIA/k8s-device-plugin/internal/lm"
-	"github.com/NVIDIA/k8s-device-plugin/internal/resource"
-	"github.com/NVIDIA/k8s-device-plugin/internal/vgpu"
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/info"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/lm"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/resource"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/vgpu"
 
 	"github.com/urfave/cli/v2"
 	"k8s.io/klog/v2"
@@ -89,6 +90,12 @@ func main() {
 			Usage:       "Use NFD NodeFeature API to publish labels",
 			EnvVars:     []string{"GFD_USE_NODE_FEATURE_API"},
 		},
+		&cli.BoolFlag{
+			Name:    "topology-enabled",
+			Value:   false,
+			Usage:   "enabled gpu topology aware info upload to node.",
+			EnvVars: []string{"TOPOLOGY_ENABLE"},
+		},
 	}
 
 	if err := c.Run(os.Args); err != nil {
@@ -98,6 +105,12 @@ func main() {
 }
 
 func validateFlags(config *spec.Config) error {
+	// if enable topology then can't set mig-strategy
+	if config.Flags.TopologyEnabled != nil && *config.Flags.TopologyEnabled {
+		if config.Flags.MigStrategy != nil && *config.Flags.MigStrategy != spec.MigStrategyNone {
+			return errors.New("enable gpu topology aware can't use mig model")
+		}
+	}
 	return nil
 }
 
@@ -164,6 +177,8 @@ func run(manager resource.Manager, vgpu vgpu.Interface, config *spec.Config, sig
 	}()
 
 	timestampLabeler := lm.NewTimestampLabeler(config)
+	refreshChan := make(chan struct{}, 1)
+	_ = runCollectGPUTopology(manager, config, refreshChan)
 rerun:
 	loopLabelers, err := lm.NewLabelers(manager, vgpu, config)
 	if err != nil {
@@ -201,7 +216,9 @@ rerun:
 		select {
 		case <-rerunTimeout:
 			goto rerun
-
+		case <-refreshChan:
+			klog.Info("trigger refresh chan")
+			goto rerun
 		// Watch for any signals from the OS. On SIGHUP trigger a reload of the config.
 		// On all other signals, exit the loop and exit the program.
 		case s := <-sigs:
@@ -275,4 +292,21 @@ func disableResourceRenamingInConfig(config *spec.Config) {
 	if setsDevices {
 		klog.Info("Customizing the 'devices' field in sharing.timeSlicing.resources is not yet supported in the config. Ignoring...")
 	}
+}
+
+// runCollectGPUTopology collect gpu link type topology and bandwidth type topology
+// TODO when add device can't handler
+func runCollectGPUTopology(manager resource.Manager, config *spec.Config, refreshChan chan<- struct{}) error {
+	annotationLM, err := lm.NewAnnotation(manager, config, refreshChan)
+	if annotationLM != nil {
+		l, err := annotationLM.Labels()
+		if err != nil {
+			return fmt.Errorf("error generating labels: %v", err)
+		}
+		err = l.UpdateNodeAnnotation()
+		if err != nil {
+			return fmt.Errorf("error patch node annotation: %v", err)
+		}
+	}
+	return err
 }

@@ -19,7 +19,7 @@ package resource
 import (
 	"fmt"
 
-	"github.com/NVIDIA/k8s-device-plugin/internal/cuda"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/cuda"
 )
 
 type cudaLib struct{}
