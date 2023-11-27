@@ -558,7 +558,7 @@ func (plugin *NvidiaDevicePlugin) allocatePod(labelSelector metav1.LabelSelector
 		if p.Status.Phase == corev1.PodRunning || p.Status.Phase == corev1.PodSucceeded {
 			continue
 		}
-		if status, ok := p.Annotations[TopologyAllocationStatusAnnotationKey]; ok && status == "success" {
+		if status, ok := p.Annotations[TopologyAllocationStatusAnnotationKey]; ok && status == string(SuccessAllocationStatus) {
 			// when restart pod
 			continue
 		}
