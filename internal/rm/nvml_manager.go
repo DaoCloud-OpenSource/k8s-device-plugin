@@ -19,9 +19,9 @@ package rm
 import (
 	"fmt"
 
+	spec "github.com/DaoCloud-OpenSource/k8s-device-plugin/api/config/v1"
 	"github.com/NVIDIA/go-gpuallocator/gpuallocator"
 	"github.com/NVIDIA/go-nvlib/pkg/nvml"
-	spec "github.com/NVIDIA/k8s-device-plugin/api/config/v1"
 	"k8s.io/klog/v2"
 )
 

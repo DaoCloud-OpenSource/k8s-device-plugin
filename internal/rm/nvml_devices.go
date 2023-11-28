@@ -26,7 +26,7 @@ import (
 	"github.com/NVIDIA/go-nvlib/pkg/nvlib/info"
 	"github.com/NVIDIA/go-nvlib/pkg/nvml"
 
-	"github.com/NVIDIA/k8s-device-plugin/internal/mig"
+	"github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/mig"
 )
 
 const (

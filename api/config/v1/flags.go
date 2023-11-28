@@ -62,6 +62,7 @@ type CommandLineFlags struct {
 	MOFEDEnabled     *bool                   `json:"mofedEnabled"               yaml:"mofedEnabled"`
 	Plugin           *PluginCommandLineFlags `json:"plugin,omitempty"           yaml:"plugin,omitempty"`
 	GFD              *GFDCommandLineFlags    `json:"gfd,omitempty"              yaml:"gfd,omitempty"`
+	TopologyEnabled  *bool                   `json:"topologyEnabled" yaml:"topologyEnabled"`
 }
 
 // PluginCommandLineFlags holds the list of command line flags specific to the device plugin.
@@ -156,6 +157,10 @@ func (f *Flags) UpdateFromCLIFlags(c *cli.Context, flags []cli.Flag) {
 				updateFromCLIFlag(&f.GFD.NoTimestamp, c, n)
 			case "machine-type-file":
 				updateFromCLIFlag(&f.GFD.MachineTypeFile, c, n)
+			}
+			// enable topology
+			if n == "topology-enabled" {
+				updateFromCLIFlag(&f.TopologyEnabled, c, n)
 			}
 		}
 	}

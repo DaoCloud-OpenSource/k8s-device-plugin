@@ -16,7 +16,7 @@
 
 package plugin
 
-import "github.com/NVIDIA/k8s-device-plugin/internal/rm"
+import "github.com/DaoCloud-OpenSource/k8s-device-plugin/internal/rm"
 
 // Interface defines the API for the plugin package
 type Interface interface {
